@@ -5,6 +5,8 @@ import { Box, Stack, Typography } from '@mui/material';
 import { useLocalContext } from '@graasp/apps-query-client';
 import { PermissionLevel } from '@graasp/sdk';
 
+import { List } from 'immutable';
+
 import { ANALYTICS_VIEW_CY } from '@/config/selectors';
 
 import { useAppDataContext } from '../context/AppDataContext';
@@ -14,7 +16,8 @@ const AnalyticsView = (): JSX.Element => {
   const { permission } = useLocalContext();
   const { appData } = useAppDataContext();
 
-  const getAllRating = () => appData.map((m) => Number(m?.data?.rating));
+  const getAllRating = (): List<number> =>
+    appData.map((m) => Number(m?.data?.rating));
 
   const computeAverageRating = (): number => {
     const ratings = getAllRating();

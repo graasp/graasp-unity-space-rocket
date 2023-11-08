@@ -14,9 +14,9 @@ const UnityView = (): JSX.Element => {
 
   const { unityProvider, sendMessage, isLoaded } = useUnityContext({
     loaderUrl: './BuildSpaceRocket/Build/BuildSpaceRocket.loader.js',
-    dataUrl: './BuildSpaceRocket/Build/BuildSpaceRocket.data.br',
-    frameworkUrl: './BuildSpaceRocket/Build/BuildSpaceRocket.framework.js.br',
-    codeUrl: './BuildSpaceRocket/Build/BuildSpaceRocket.wasm.br',
+    dataUrl: './BuildSpaceRocket/Build/BuildSpaceRocket.data',
+    frameworkUrl: './BuildSpaceRocket/Build/BuildSpaceRocket.framework.js',
+    codeUrl: './BuildSpaceRocket/Build/BuildSpaceRocket.wasm',
   });
 
   useEffect(() => {

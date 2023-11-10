@@ -14,7 +14,7 @@ export const DEFAULT_UNITY_SETTINGS: UnitySettings = {
       [UnitySettingsKeys.Z]: -10,
     },
     [UnitySettingsKeys.ShowCameraControl]: true,
-    [UnitySettingsKeys.IsLockedOnTarget]: true,
+    [UnitySettingsKeys.IsLockedOnObject]: true,
   },
 
   [UnitySettingsKeys.ShowReferenceFrame]: false,

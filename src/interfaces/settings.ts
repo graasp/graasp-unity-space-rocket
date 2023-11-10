@@ -9,7 +9,7 @@ export enum UnitySettingsKeys {
   Camera = 'camera',
   ShowCameraControl = 'showCameraControl',
   Position = 'position',
-  IsLockedOnTarget = 'isLockedOnTarget',
+  IsLockedOnObject = 'isLockedOnObject',
   ShowReferenceFrame = 'showReferenceFrame',
   PhysicsObject = 'physicalObject',
   ShowTrace = 'showTrace',
@@ -53,7 +53,7 @@ export type UnitySettings = {
       [UnitySettingsKeys.Z]: number;
     };
     [UnitySettingsKeys.ShowCameraControl]: boolean;
-    [UnitySettingsKeys.IsLockedOnTarget]: boolean;
+    [UnitySettingsKeys.IsLockedOnObject]: boolean;
   };
 
   [UnitySettingsKeys.ShowReferenceFrame]: boolean;

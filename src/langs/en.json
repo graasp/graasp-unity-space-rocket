@@ -33,7 +33,7 @@
     "ShowVelocityEquation": "Show velocity equation",
     "CameraSettings": "Camera settings",
     "Position": "Position",
-    "IsLockedOnTarget": "Is locked on rocket",
+    "IsLockedOnObject": "Is locked on rocket",
     "ForceSettings": "Rocket thrust settings",
     "ShowVector": "Show vector",
     "ShowLabel": "Show label",

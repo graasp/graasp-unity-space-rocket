@@ -103,9 +103,9 @@ const AdminView = (): JSX.Element => {
                 <CustomCheckbox
                   path={[
                     UnitySettingsKeys.Camera,
-                    UnitySettingsKeys.IsLockedOnTarget,
+                    UnitySettingsKeys.IsLockedOnObject,
                   ]}
-                  label={t('IsLockedOnTarget')}
+                  label={t('IsLockedOnObject')}
                 />
               </div>
             </Tooltip>

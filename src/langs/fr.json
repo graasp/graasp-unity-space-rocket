@@ -33,7 +33,7 @@
     "ShowVelocityEquation": "Afficher l'équation de la vitesse",
     "CameraSettings": "Paramètres de la caméra",
     "Position": "Position",
-    "IsLockedOnTarget": "Caméra suit la fusée",
+    "IsLockedOnObject": "Caméra suit la fusée",
     "ForceSettings": "Paramètres de la force de poussée",
     "ShowVector": "Afficher le vecteur",
     "ShowLabel": "Afficher le label",

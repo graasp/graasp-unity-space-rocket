@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import { Box, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 
 import { useLocalContext } from '@graasp/apps-query-client';
 import { PermissionLevel } from '@graasp/sdk';
@@ -31,13 +31,13 @@ const AnalyticsView = (): JSX.Element => {
     <div data-cy={ANALYTICS_VIEW_CY}>
       {permission === PermissionLevel.Admin && (
         <Stack direction="column" spacing={2}>
-          <Box p={2}>
+          <Stack p={2}>
             <pre>{JSON.stringify(getAllRating(), null, 2)}</pre>
-          </Box>
-          <Box p={2}>
+          </Stack>
+          <Stack p={2}>
             <Typography>{t('RatingAverage')}</Typography>
             <pre>{JSON.stringify(computeAverageRating(), null, 2)}</pre>
-          </Box>
+          </Stack>
         </Stack>
       )}
     </div>

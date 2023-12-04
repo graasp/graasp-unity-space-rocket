@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 import { FilterCenterFocusOutlined } from '@mui/icons-material';
-import { Box, Icon, Stack, Tooltip } from '@mui/material';
+import { Icon, Stack, Tooltip } from '@mui/material';
 
 import { PhysicsUnits } from '@/config/physicsUnits';
 import { UnitySettingsKeys } from '@/interfaces/settings';
@@ -36,7 +36,7 @@ const CameraSettings = (): JSX.Element => {
         icon={<Icon />}
       />
       <Tooltip title={t('TooltipIsLockedOnTarget')}>
-        <Box width="100%">
+        <Stack width="100%">
           <CustomCheckbox
             path={[
               UnitySettingsKeys.Camera,
@@ -45,7 +45,7 @@ const CameraSettings = (): JSX.Element => {
             label={t('IsLockedOnTarget')}
             icon={<FilterCenterFocusOutlined />}
           />
-        </Box>
+        </Stack>
       </Tooltip>
     </Stack>
   );

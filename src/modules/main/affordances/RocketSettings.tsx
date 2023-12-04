@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 import { RouteOutlined } from '@mui/icons-material';
-import { Box, Icon, Stack, Tooltip, Typography } from '@mui/material';
+import { Icon, Stack, Tooltip, Typography } from '@mui/material';
 
 import { PhysicsUnits } from '@/config/physicsUnits';
 import { UnitySettingsKeys } from '@/interfaces/settings';
@@ -127,7 +127,7 @@ const RocketSettings = (): JSX.Element => {
         icon={<Icon />}
       />
       <Tooltip title={t('TooltipVelocity')}>
-        <Box width="100%">
+        <Stack width="100%">
           <CustomCheckbox
             path={[
               UnitySettingsKeys.PhysicsObject,
@@ -136,7 +136,7 @@ const RocketSettings = (): JSX.Element => {
             label={t('VelocityVectorIsInteractive')}
             icon={<Icon />}
           />
-        </Box>
+        </Stack>
       </Tooltip>
       <CustomCheckbox
         path={[

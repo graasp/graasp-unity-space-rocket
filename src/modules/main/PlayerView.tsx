@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
 import { Rating, Stack, Typography } from '@mui/material';
-import Box from '@mui/material/Box';
 
 import { useLocalContext } from '@graasp/apps-query-client';
 
@@ -49,9 +48,9 @@ const PlayerView = (): JSX.Element => {
 
   return (
     <div data-cy={PLAYER_VIEW_CY}>
-      <Box sx={{ m: 5 }}>
+      <Stack sx={{ m: 5 }}>
         <UnityView recordingComponent />
-      </Box>
+      </Stack>
       <Stack
         direction="column"
         alignItems="center"

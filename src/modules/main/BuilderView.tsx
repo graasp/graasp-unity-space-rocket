@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Analytics, Settings, ViewInArOutlined } from '@mui/icons-material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { Box, Tab, Typography } from '@mui/material';
+import { Stack, Tab, Typography } from '@mui/material';
 
 import { useLocalContext } from '@graasp/apps-query-client';
 import { PermissionLevel } from '@graasp/sdk';
@@ -26,7 +26,7 @@ const BuilderView = (): JSX.Element => {
   const [activeTab, setActiveTab] = useState(Tabs.SIM_SETTINGS_VIEW);
 
   return (
-    <Box data-cy={BUILDER_VIEW_CY}>
+    <Stack data-cy={BUILDER_VIEW_CY}>
       <TabContext data-cy={BUILDER_VIEW_CY} value={activeTab}>
         <TabList
           onChange={(_, newTabs) => setActiveTab(newTabs)}
@@ -63,7 +63,7 @@ const BuilderView = (): JSX.Element => {
           <UnityView recordingComponent />
         </TabPanel>
       </TabContext>
-    </Box>
+    </Stack>
   );
 };
 export default BuilderView;

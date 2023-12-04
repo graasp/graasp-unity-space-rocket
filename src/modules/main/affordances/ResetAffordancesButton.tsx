@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import { Box, Button } from '@mui/material';
+import { Button, Stack } from '@mui/material';
 
 import { DEFAULT_UNITY_SETTINGS } from '@/config/settings';
 import { UNITY_SETTINGS_NAME } from '@/interfaces/settings';
@@ -12,7 +12,14 @@ const ResetAffordancesButton = (): JSX.Element => {
   const { saveSettings } = useSettings();
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'flex-start', m: 2 }}>
+    <Stack
+      sx={{
+        display: 'flex',
+        justifyContent: 'flex-start',
+        m: 2,
+        width: 'fit-content',
+      }}
+    >
       <Button
         color="error"
         variant="outlined"
@@ -22,7 +29,7 @@ const ResetAffordancesButton = (): JSX.Element => {
       >
         {t('ResetDefaultSettings')}
       </Button>
-    </Box>
+    </Stack>
   );
 };
 export default ResetAffordancesButton;

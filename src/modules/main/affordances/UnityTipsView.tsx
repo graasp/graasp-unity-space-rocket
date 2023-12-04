@@ -16,7 +16,7 @@ const UnityTipsView = (): JSX.Element => {
       <Card sx={{ maxWidth: '100%', boxShadow: 'none' }}>
         <CardMedia
           component="img"
-          image="/graphics/unity_ref_sys.png"
+          image="./graphics/unity_ref_sys.png"
           alt="unity reference system"
           sx={{ maxWidth: '500px', margin: '0 auto' }}
         />

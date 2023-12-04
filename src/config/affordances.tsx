@@ -49,7 +49,7 @@ export function GetAffordancesList(): ListAffordances[] {
           sx={{ width: 24, height: 30, backgroundColor: 'transparent' }}
         >
           <img
-            src="/graphics/rocket.svg"
+            src="./graphics/rocket.svg"
             alt="rocket img"
             style={{
               width: '100%',
@@ -70,7 +70,7 @@ export function GetAffordancesList(): ListAffordances[] {
           sx={{ width: 24, height: 24, backgroundColor: 'transparent' }}
         >
           <img
-            src="/graphics/force_vector.svg"
+            src="./graphics/force_vector.svg"
             alt="vector img"
             style={{
               width: '100%',
@@ -91,7 +91,7 @@ export function GetAffordancesList(): ListAffordances[] {
           sx={{ width: 26, height: 24, backgroundColor: 'transparent' }}
         >
           <img
-            src="/graphics/asteroid_small2.png"
+            src="./graphics/asteroid_small2.png"
             alt="asteroid img"
             style={{ width: '100%', height: '100%', objectFit: 'contain' }}
           />

@@ -55,14 +55,18 @@ const UnityView = (props: UnityViewProps): JSX.Element => {
 
   const [isDownloadEnabled, setDownloadEnabled] = useState(false);
 
-  useEffect(() => {
-    if (isRecording) {
-      setDownloadEnabled(false);
-      sendMessage('DataExporter', 'StartGameObjectRecording');
-    } else if (!isDownloadEnabled) {
-      sendMessage('DataExporter', 'StopGameObjectRecording');
-    }
-  }, [isRecording]);
+  useEffect(
+    () => {
+      if (isRecording) {
+        setDownloadEnabled(false);
+        sendMessage('DataExporter', 'StartGameObjectRecording');
+      } else if (!isDownloadEnabled) {
+        sendMessage('DataExporter', 'StopGameObjectRecording');
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isRecording],
+  );
 
   const receiveUnityGameData = useCallback(
     (gameDataJson: void | number | string | undefined) => {

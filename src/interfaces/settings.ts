@@ -2,13 +2,14 @@ export const UNITY_SETTINGS_NAME = 'UNITY_SETTINGS';
 
 // general settings keys
 export enum UnitySettingsKeys {
-  ShowPlayButton = 'showPlayButton',
+  ShowPlayPauseButton = 'showPlayButton',
   ShowPauseButton = 'showPauseButton',
   ShowResetButton = 'showResetButton',
   ShowTimeControl = 'showTimeControl',
   Camera = 'camera',
   ShowCameraControl = 'showCameraControl',
   Position = 'position',
+  Rotation = 'rotation',
   IsLockedOnObject = 'isLockedOnObject',
   ShowReferenceFrame = 'showReferenceFrame',
   PhysicsObject = 'physicalObject',
@@ -41,13 +42,18 @@ export enum UnitySettingsKeys {
 
 // type of Unity settings
 export type UnitySettings = {
-  [UnitySettingsKeys.ShowPlayButton]: boolean;
+  [UnitySettingsKeys.ShowPlayPauseButton]: boolean;
   [UnitySettingsKeys.ShowPauseButton]: boolean;
   [UnitySettingsKeys.ShowResetButton]: boolean;
   [UnitySettingsKeys.ShowTimeControl]: boolean;
 
   [UnitySettingsKeys.Camera]: {
     [UnitySettingsKeys.Position]: {
+      [UnitySettingsKeys.X]: number;
+      [UnitySettingsKeys.Y]: number;
+      [UnitySettingsKeys.Z]: number;
+    };
+    [UnitySettingsKeys.Rotation]: {
       [UnitySettingsKeys.X]: number;
       [UnitySettingsKeys.Y]: number;
       [UnitySettingsKeys.Z]: number;

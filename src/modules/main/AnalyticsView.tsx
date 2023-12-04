@@ -5,23 +5,26 @@ import { Box, Stack, Typography } from '@mui/material';
 import { useLocalContext } from '@graasp/apps-query-client';
 import { PermissionLevel } from '@graasp/sdk';
 
-import { List } from 'immutable';
-
+import { hooks } from '@/config/queryClient';
 import { ANALYTICS_VIEW_CY } from '@/config/selectors';
-
-import { useAppDataContext } from '../context/AppDataContext';
 
 const AnalyticsView = (): JSX.Element => {
   const { t } = useTranslation();
   const { permission } = useLocalContext();
-  const { appData } = useAppDataContext();
+  const { data: appData } = hooks.useAppData();
 
-  const getAllRating = (): List<number> =>
-    appData.map((m) => Number(m?.data?.rating));
+  const getAllRating = (): Array<number> => {
+    if (appData === undefined) {
+      return [];
+    }
+    return appData?.map((m) => Number(m?.data?.rating));
+  };
 
   const computeAverageRating = (): number => {
     const ratings = getAllRating();
-    return (ratings?.reduce((r1, r2) => r1 + r2, 0) || 0) / (ratings.size || 1);
+    return (
+      (ratings?.reduce((r1, r2) => r1 + r2, 0) || 0) / (ratings.length || 1)
+    );
   };
 
   return (
@@ -29,7 +32,7 @@ const AnalyticsView = (): JSX.Element => {
       {permission === PermissionLevel.Admin && (
         <Stack direction="column" spacing={2}>
           <Box p={2}>
-            <pre>{JSON.stringify(getAllRating()?.toJS(), null, 2)}</pre>
+            <pre>{JSON.stringify(getAllRating(), null, 2)}</pre>
           </Box>
           <Box p={2}>
             <Typography>{t('RatingAverage')}</Typography>

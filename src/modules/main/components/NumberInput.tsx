@@ -1,4 +1,4 @@
-import { Stack, TextField, Typography } from '@mui/material';
+import { Button, Stack, TextField, Typography } from '@mui/material';
 
 import { DEFAULT_UNITY_SETTINGS } from '@/config/settings';
 import {
@@ -9,12 +9,13 @@ import {
 
 import { useSettings } from '../../context/SettingsContext';
 
-export interface CustomCheckboxProps {
+export interface NumberInputProps {
   path: UnitySettingsKeys[]; // list of Keys defining path to the settings to update.
   label: string;
+  unit?: string;
 }
 
-const NumberInput = (props: CustomCheckboxProps): JSX.Element => {
+const NumberInput = (props: NumberInputProps): JSX.Element => {
   const {
     [UNITY_SETTINGS_NAME]: settings = DEFAULT_UNITY_SETTINGS,
     saveSettings,
@@ -74,6 +75,18 @@ const NumberInput = (props: CustomCheckboxProps): JSX.Element => {
         value={GetValue()}
         onChange={onInputChange}
       />
+      <Button
+        color="primary"
+        sx={{
+          borderRadius: '50%',
+          minWidth: 0,
+          width: '50px',
+          height: '50px',
+          p: '2px',
+        }}
+      >
+        {props.unit}
+      </Button>
     </Stack>
   );
 };

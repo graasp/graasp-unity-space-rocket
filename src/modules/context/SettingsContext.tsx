@@ -59,8 +59,6 @@ export const SettingsProvider: FC<Prop> = ({ children }) => {
     newValue: AllSettingsDataType,
   ): void => {
     if (appSettingsList) {
-      // todo: types are not inferred correctly here
-      // @ts-ignore
       const previousSetting = appSettingsList.find((s) => s.name === name);
       // setting does not exist
       if (!previousSetting) {
@@ -88,7 +86,7 @@ export const SettingsProvider: FC<Prop> = ({ children }) => {
           // todo: types are not inferred correctly here
           // @ts-ignore
           const setting = appSettingsList.find((s) => s.name === key);
-          const settingData = setting?.data.toJS();
+          const settingData = setting?.data;
           acc[key] = settingData as AllSettingsType[T];
           return acc;
         },

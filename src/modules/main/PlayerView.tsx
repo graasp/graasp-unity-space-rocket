@@ -5,19 +5,21 @@ import Box from '@mui/material/Box';
 
 import { useLocalContext } from '@graasp/apps-query-client';
 
+import { hooks, mutations } from '@/config/queryClient';
 import { PLAYER_VIEW_CY } from '@/config/selectors';
 
-import { useAppDataContext } from '../context/AppDataContext';
 import UnityView from './UnityView';
 
 const PlayerView = (): JSX.Element => {
   const { t } = useTranslation();
   const context = useLocalContext();
 
-  const { postAppData, patchAppData, appData } = useAppDataContext();
+  const { data: appData } = hooks.useAppData();
+  const { mutate: postAppData } = mutations.usePostAppData();
+  const { mutate: patchAppData } = mutations.usePatchAppData();
 
   const getPreviousRating = (): number | null => {
-    const previousRating = appData.find(
+    const previousRating = appData?.find(
       (m) => m.type === 'rating-action' && m?.creator?.id === context?.memberId,
     );
     // setting does not exist
@@ -48,7 +50,7 @@ const PlayerView = (): JSX.Element => {
   return (
     <div data-cy={PLAYER_VIEW_CY}>
       <Box sx={{ m: 5 }}>
-        <UnityView />
+        <UnityView recordingComponent />
       </Box>
       <Stack
         direction="column"

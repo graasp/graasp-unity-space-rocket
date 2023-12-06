@@ -2,7 +2,7 @@ import { UnitySettings, UnitySettingsKeys } from '../interfaces/settings';
 
 // default settings object
 export const DEFAULT_UNITY_SETTINGS: UnitySettings = {
-  [UnitySettingsKeys.ShowPlayButton]: true,
+  [UnitySettingsKeys.ShowPlayPauseButton]: true,
   [UnitySettingsKeys.ShowPauseButton]: true,
   [UnitySettingsKeys.ShowResetButton]: true,
   [UnitySettingsKeys.ShowTimeControl]: true,
@@ -13,8 +13,13 @@ export const DEFAULT_UNITY_SETTINGS: UnitySettings = {
       [UnitySettingsKeys.Y]: 1,
       [UnitySettingsKeys.Z]: -10,
     },
+    [UnitySettingsKeys.Rotation]: {
+      [UnitySettingsKeys.X]: 0,
+      [UnitySettingsKeys.Y]: 0,
+      [UnitySettingsKeys.Z]: 0,
+    },
     [UnitySettingsKeys.ShowCameraControl]: true,
-    [UnitySettingsKeys.IsLockedOnTarget]: true,
+    [UnitySettingsKeys.IsLockedOnObject]: true,
   },
 
   [UnitySettingsKeys.ShowReferenceFrame]: false,

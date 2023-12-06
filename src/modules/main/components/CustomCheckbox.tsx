@@ -1,6 +1,7 @@
-import { Checkbox, FormControlLabel } from '@mui/material';
+import { ReactNode } from 'react';
 
-import { ADMIN_VIEW_CY } from '@/config/selectors';
+import { Box, Checkbox, Divider, Stack, Typography } from '@mui/material';
+
 import { DEFAULT_UNITY_SETTINGS } from '@/config/settings';
 import {
   UNITY_SETTINGS_NAME,
@@ -13,6 +14,8 @@ import { useSettings } from '../../context/SettingsContext';
 export interface CustomCheckboxProps {
   path: UnitySettingsKeys[]; // list of Keys defining path to the settings to update.
   label: string;
+  icon?: ReactNode;
+  divider?: boolean; // defaut is true.
 }
 
 const CustomCheckbox = (props: CustomCheckboxProps): JSX.Element => {
@@ -21,18 +24,10 @@ const CustomCheckbox = (props: CustomCheckboxProps): JSX.Element => {
     saveSettings,
   } = useSettings();
 
-  const getUnitySettingsCopy = (): UnitySettings => {
-    // const duplicateUnitySettings = JSON.parse(JSON.stringify(settings));
-    // const duplicateUnitySettings = {
-    //   ...settings,
-    //   [UnitySettingsKeys.Camera]: {
-    //     ...settings[UnitySettingsKeys.Camera],
-    //     [UnitySettingsKeys.Position]: {
-    //       ...settings[UnitySettingsKeys.Camera][UnitySettingsKeys.Position]
-    //     }
-    //   }
-    // };
+  const showDivider: boolean =
+    props?.divider === undefined ? true : props.divider;
 
+  const getUnitySettingsCopy = (): UnitySettings => {
     const duplicateUnitySettings = JSON.parse(JSON.stringify(settings));
 
     return duplicateUnitySettings;
@@ -67,17 +62,30 @@ const CustomCheckbox = (props: CustomCheckboxProps): JSX.Element => {
   };
 
   return (
-    <div data-cy={ADMIN_VIEW_CY}>
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={GetSettingFromPath()}
-            onChange={UpdateSettingsValue}
-          />
-        }
-        label={props.label}
-      />
-    </div>
+    <Box width="100%">
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={2}
+      >
+        {props.icon}
+        <Typography width="80%" sx={{ wordWrap: 'break-word' }}>
+          {props.label}
+        </Typography>
+        <Checkbox
+          checked={GetSettingFromPath()}
+          onChange={UpdateSettingsValue}
+          sx={{ marginRight: 0 }}
+        />
+      </Stack>
+      {showDivider && (
+        <Divider
+          variant="middle"
+          sx={{ paddingTop: '5px', marginLeft: '10px' }}
+        />
+      )}
+    </Box>
   );
 };
 

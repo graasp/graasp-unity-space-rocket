@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.0.0 (2023-12-06)
+
+
+### Features
+
+* copy new app version ([f465c78](https://github.com/graasp/graasp-unity-space-rocket/commit/f465c78ae9e36377fa90ad7fe66a4249b3a1e8de))
+* decompress Unity build ([8dd03b8](https://github.com/graasp/graasp-unity-space-rocket/commit/8dd03b821fd55ecc7072b468be2ff0fa36e5cc0d))
+
+
+### Bug Fixes
+
+* add deploy workflows ([48667be](https://github.com/graasp/graasp-unity-space-rocket/commit/48667be852f07b4aa57254cae63c572282296c37))
+* eslint error ([8d9c0c5](https://github.com/graasp/graasp-unity-space-rocket/commit/8d9c0c5893837be34422f1b1ab5038be6b6e332e))
+* issues with env variables ([048a553](https://github.com/graasp/graasp-unity-space-rocket/commit/048a553364264d77115757974237b3d23f31ae8f))
+* path to import images from public/ ([0b67426](https://github.com/graasp/graasp-unity-space-rocket/commit/0b67426440c9ec61011f131a5f28913aca2e0f94))
+* remove Box mui from project ([758eab1](https://github.com/graasp/graasp-unity-space-rocket/commit/758eab182e18db309091f7d1c57c3406092b1393))
+* rename isLockedOnTarget to isLockedOnObject affordances ([f942766](https://github.com/graasp/graasp-unity-space-rocket/commit/f94276680094377ef0d9cf3d3491a351c6241bd6))
+* restrict input number to positive value for thrust and asteroid velocity ([c5afe6f](https://github.com/graasp/graasp-unity-space-rocket/commit/c5afe6fe10b5a0b2e4d199a09f0777dde95ee7a0))
+* update dependencies ([d11d94d](https://github.com/graasp/graasp-unity-space-rocket/commit/d11d94d0af1fb185d6b9c1cb221dd7e67dee6c2e))
+
 ## 1.0.0 (2023-07-19)
 
 

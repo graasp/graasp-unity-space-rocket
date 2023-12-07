@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import { RouteOutlined } from '@mui/icons-material';
+import { PanToolOutlined, RouteOutlined } from '@mui/icons-material';
 import { Icon, Stack, Tooltip, Typography } from '@mui/material';
 
 import { PhysicsUnits } from '@/config/physicsUnits';
@@ -20,6 +20,31 @@ const RocketSettings = (): JSX.Element => {
       spacing={2}
       width="100%"
     >
+      <Vector3Input
+        path={[
+          UnitySettingsKeys.PhysicsObject,
+          UnitySettingsKeys.InitialPosition,
+        ]}
+        label={t('InitialPosition')}
+        unit={PhysicsUnits.Meters}
+      />
+      <Vector3Input
+        path={[
+          UnitySettingsKeys.PhysicsObject,
+          UnitySettingsKeys.InitialRotation,
+        ]}
+        label={t('InitialRotation')}
+        unit={PhysicsUnits.Degree}
+      />
+      <Vector3Input
+        path={[
+          UnitySettingsKeys.PhysicsObject,
+          UnitySettingsKeys.InitialVelocity,
+        ]}
+        label={t('InitialVelocity')}
+        unit={PhysicsUnits.Velocity}
+      />
+
       <Stack
         direction="row"
         justifyContent="center"
@@ -81,49 +106,19 @@ const RocketSettings = (): JSX.Element => {
       </Stack>
 
       <CustomCheckbox
-        path={[UnitySettingsKeys.PhysicsObject, UnitySettingsKeys.ShowTrace]}
-        label={t('ShowTrace')}
-        icon={<Icon />}
-      />
-      <CustomCheckbox
-        path={[
-          UnitySettingsKeys.PhysicsObject,
-          UnitySettingsKeys.TraceIsInteractive,
-        ]}
-        label={t('ShowTraceButton')}
-        icon={<RouteOutlined />}
-      />
-      <Vector3Input
-        path={[
-          UnitySettingsKeys.PhysicsObject,
-          UnitySettingsKeys.InitialPosition,
-        ]}
-        label={t('InitialPosition')}
-        unit={PhysicsUnits.Meters}
-      />
-      <Vector3Input
-        path={[
-          UnitySettingsKeys.PhysicsObject,
-          UnitySettingsKeys.InitialRotation,
-        ]}
-        label={t('InitialRotation')}
-        unit={PhysicsUnits.Degree}
-      />
-      <Vector3Input
-        path={[
-          UnitySettingsKeys.PhysicsObject,
-          UnitySettingsKeys.InitialVelocity,
-        ]}
-        label={t('InitialVelocity')}
-        unit={PhysicsUnits.Velocity}
-      />
-
-      <CustomCheckbox
         path={[
           UnitySettingsKeys.PhysicsObject,
           UnitySettingsKeys.ShowVelocityVector,
         ]}
         label={t('ShowVelocityVector')}
+        icon={<Icon />}
+      />
+      <CustomCheckbox
+        path={[
+          UnitySettingsKeys.PhysicsObject,
+          UnitySettingsKeys.ShowVelocityLabel,
+        ]}
+        label={t('ShowVelocityLabel')}
         icon={<Icon />}
       />
       <Tooltip title={t('TooltipVelocity')}>
@@ -134,24 +129,29 @@ const RocketSettings = (): JSX.Element => {
               UnitySettingsKeys.VelocityVectorIsInteractive,
             ]}
             label={t('VelocityVectorIsInteractive')}
-            icon={<Icon />}
+            icon={<PanToolOutlined />}
           />
         </Stack>
       </Tooltip>
       <CustomCheckbox
         path={[
           UnitySettingsKeys.PhysicsObject,
-          UnitySettingsKeys.ShowVelocityLabel,
+          UnitySettingsKeys.ShowVelocityEquation,
         ]}
-        label={t('ShowVelocityLabel')}
+        label={t('ShowVelocityEquation')}
         icon={<Icon />}
       />
       <CustomCheckbox
         path={[
           UnitySettingsKeys.PhysicsObject,
-          UnitySettingsKeys.ShowVelocityEquation,
+          UnitySettingsKeys.TraceIsInteractive,
         ]}
-        label={t('ShowVelocityEquation')}
+        label={t('ShowTraceButton')}
+        icon={<RouteOutlined />}
+      />
+      <CustomCheckbox
+        path={[UnitySettingsKeys.PhysicsObject, UnitySettingsKeys.ShowTrace]}
+        label={t('ShowTrace')}
         icon={<Icon />}
       />
       <CustomCheckbox

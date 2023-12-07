@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
-import { Icon, Stack } from '@mui/material';
+import { PanToolOutlined } from '@mui/icons-material';
+import { Stack, Tooltip } from '@mui/material';
 
 import { PhysicsUnits } from '@/config/physicsUnits';
 import { UnitySettingsKeys } from '@/interfaces/settings';
@@ -19,11 +20,15 @@ const AsteroidSettings = (): JSX.Element => {
       spacing={2}
       width="100%"
     >
-      <CustomCheckbox
-        path={[UnitySettingsKeys.ShowAsteroidButton]}
-        label={t('ShowAsteroidButton')}
-        icon={<Icon />}
-      />
+      <Tooltip title={t('TooltipAsteroid')}>
+        <Stack width="100%">
+          <CustomCheckbox
+            path={[UnitySettingsKeys.ShowAsteroidButton]}
+            label={t('ShowAsteroidButton')}
+            icon={<PanToolOutlined />}
+          />
+        </Stack>
+      </Tooltip>
       <NumberInput
         path={[UnitySettingsKeys.AsteroidCollisionForce]}
         label={t('AsteroidCollisionForce')}

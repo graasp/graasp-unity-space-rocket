@@ -14,6 +14,9 @@ const UnityTipsView = (): JSX.Element => {
       width="100%"
     >
       <Card sx={{ maxWidth: '100%', boxShadow: 'none' }}>
+        <CardContent>
+          <Typography>{t('MainInformationTips')}</Typography>
+        </CardContent>
         <CardMedia
           component="img"
           image="./graphics/unity_ref_sys.png"
@@ -36,6 +39,7 @@ const UnityTipsView = (): JSX.Element => {
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {t('UnityTips2')}
+            <i>{t('UnityTips3')}</i>
           </Typography>
         </CardContent>
         <CardContent>

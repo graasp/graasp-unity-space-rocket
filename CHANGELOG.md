@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.1.0](https://github.com/graasp/graasp-unity-space-rocket/compare/v1.0.0...v1.1.0) (2023-12-08)
+
+
+### Features
+
+* new texts & diagram img ([#5](https://github.com/graasp/graasp-unity-space-rocket/issues/5)) ([718e089](https://github.com/graasp/graasp-unity-space-rocket/commit/718e0892ba58558c683791b1323867fe91bbe1e0))
+
+
+### Bug Fixes
+
+* add manual dispatch for deployment ([#7](https://github.com/graasp/graasp-unity-space-rocket/issues/7)) ([d0f9e4e](https://github.com/graasp/graasp-unity-space-rocket/commit/d0f9e4eac5e19c79a0f3506d9e2a526982d74aaf))
+* app key var name ([2eb5d1d](https://github.com/graasp/graasp-unity-space-rocket/commit/2eb5d1dc71e3f2e64f96208411d76f754330cec1))
+* deployment ([a8a7191](https://github.com/graasp/graasp-unity-space-rocket/commit/a8a71919f81c557b317f361d39ff0daa8b559348))
+* deployment vars ([#8](https://github.com/graasp/graasp-unity-space-rocket/issues/8)) ([df9df38](https://github.com/graasp/graasp-unity-space-rocket/commit/df9df3884fb03d74def961f9b00db10f54e3fcf6))
+
 ## 1.0.0 (2023-12-06)
 
 

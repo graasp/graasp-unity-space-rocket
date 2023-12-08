@@ -7,7 +7,12 @@ import istanbul from 'vite-plugin-istanbul';
 
 // https://vitejs.dev/config/
 export default ({ mode }: { mode: string }): UserConfigExport => {
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
+  process.env = {
+    VITE_VERSION: 'default',
+    VITE_BUILD_TIMESTAMP: new Date().toISOString(),
+    ...process.env,
+    ...loadEnv(mode, process.cwd()),
+  };
 
   return defineConfig({
     base: '',
@@ -22,19 +27,21 @@ export default ({ mode }: { mode: string }): UserConfigExport => {
       outDir: 'build',
     },
     plugins: [
-      checker({
-        typescript: true,
-        eslint: {
-          lintCommand:
-            'eslint --ignore-pattern "**/query-client*" "src/**/*.{ts,tsx}"',
-        },
-      }),
+      mode === 'test'
+        ? undefined
+        : checker({
+            typescript: true,
+            eslint: {
+              lintCommand: 'eslint "src/**/*.{ts,tsx}"',
+            },
+          }),
       react(),
       istanbul({
         include: 'src/*',
-        exclude: ['node_modules', 'test/'],
+        exclude: ['node_modules', 'test/', '.nyc_output', 'coverage'],
         extension: ['.js', '.ts', '.tsx'],
         requireEnv: false,
+        forceBuildInstrument: mode === 'test',
         checkProd: true,
       }),
     ],

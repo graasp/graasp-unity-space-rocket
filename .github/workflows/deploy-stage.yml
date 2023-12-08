@@ -2,6 +2,13 @@ name: Deploy to staging environment
 
 # Controls when the action will run
 on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag or branch to deploy
+        required: false
+        default: main
+        type: string
   # Triggers the workflow on repository-dispatch event
   repository_dispatch:
     types: [staging-deployment]
@@ -15,7 +22,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.client_payload.tag }}
+          ref: ${{ github.event.client_payload.tag || inputs.tag }}
 
       - name: Yarn install and Cache dependencies
         uses: graasp/graasp-deploy/.github/actions/yarn-install-and-cache@v1
@@ -27,7 +34,7 @@ jobs:
           VITE_GRAASP_APP_KEY: ${{ secrets.APP_KEY }}
           VITE_SENTRY_ENV: staging
           VITE_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
-          VITE_VERSION: ${{ github.event.client_payload.tag }}
+          VITE_VERSION: ${{ github.event.client_payload.tag || inputs.tag }}
           # add any env variable needed by your app here
         run: yarn build
         shell: bash

@@ -1,46 +1,38 @@
 import { useTranslation } from 'react-i18next';
 
-import { Stack, Typography } from '@mui/material';
-
-import { useLocalContext } from '@graasp/apps-query-client';
-import { PermissionLevel } from '@graasp/sdk';
+import { Button, Stack } from '@mui/material';
 
 import { hooks } from '@/config/queryClient';
 import { ANALYTICS_VIEW_CY } from '@/config/selectors';
 
+import SimulationRatings from './analytics/SimulationRatings';
+import UniqueUnityVisitor from './analytics/UniqueUnityVisitor';
+import UnityAnalyticsView from './analytics/UnityAnalyticsView';
+import UserUnityRunStats from './analytics/UserUnityRunStats';
+
 const AnalyticsView = (): JSX.Element => {
   const { t } = useTranslation();
-  const { permission } = useLocalContext();
-  const { data: appData } = hooks.useAppData();
-
-  const getAllRating = (): Array<number> => {
-    if (appData === undefined) {
-      return [];
-    }
-    return appData?.map((m) => Number(m?.data?.rating));
-  };
-
-  const computeAverageRating = (): number => {
-    const ratings = getAllRating();
-    return (
-      (ratings?.reduce((r1, r2) => r1 + r2, 0) || 0) / (ratings.length || 1)
-    );
-  };
-
+  const { refetch } = hooks.useAppActions();
   return (
-    <div data-cy={ANALYTICS_VIEW_CY}>
-      {permission === PermissionLevel.Admin && (
-        <Stack direction="column" spacing={2}>
-          <Stack p={2}>
-            <pre>{JSON.stringify(getAllRating(), null, 2)}</pre>
-          </Stack>
-          <Stack p={2}>
-            <Typography>{t('RatingAverage')}</Typography>
-            <pre>{JSON.stringify(computeAverageRating(), null, 2)}</pre>
-          </Stack>
+    <Stack direction="column" data-cy={ANALYTICS_VIEW_CY}>
+      <Button
+        sx={{ width: 'fit-content', height: 'fit-content', marginBottom: 2 }}
+        variant="outlined"
+        onClick={() => refetch()}
+      >
+        {t('ReloadAnalytics')}
+      </Button>
+      <Stack direction="row" width="100%" spacing={2}>
+        <Stack width="20%" direction="column" spacing={2}>
+          <UniqueUnityVisitor />
+          <SimulationRatings />
+          <UserUnityRunStats />
         </Stack>
-      )}
-    </div>
+        <Stack width="100%" spacing={2}>
+          <UnityAnalyticsView />
+        </Stack>
+      </Stack>
+    </Stack>
   );
 };
 export default AnalyticsView;

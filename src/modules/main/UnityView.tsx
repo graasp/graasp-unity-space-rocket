@@ -13,6 +13,7 @@ import { DEFAULT_UNITY_SETTINGS } from '@/config/settings';
 import { UNITY_SETTINGS_NAME } from '@/interfaces/settings';
 
 import { useSettings } from '../context/SettingsContext';
+import UnityActionReceiver from './UnityActionReceiver';
 import RestrictedNumberInput from './components/RestrictedNumberInput';
 
 export interface UnityViewProps {
@@ -28,6 +29,7 @@ const UnityView = (props: UnityViewProps): JSX.Element => {
     addEventListener,
     removeEventListener,
     isLoaded,
+    loadingProgression,
   } = useUnityContext({
     loaderUrl: './BuildSpaceRocket/Build/BuildSpaceRocket.loader.js',
     dataUrl: './BuildSpaceRocket/Build/BuildSpaceRocket.data',
@@ -126,6 +128,9 @@ const UnityView = (props: UnityViewProps): JSX.Element => {
   };
 
   // ************************ ********************* ************************ //
+
+  // ************************ ********************* ************************ //
+
   return (
     <Grid container direction="row" width="100%" minHeight="100%">
       <Grid
@@ -188,6 +193,27 @@ const UnityView = (props: UnityViewProps): JSX.Element => {
         display="flex"
         justifyContent="center"
       >
+        {isLoaded === false && (
+          // We'll conditionally render the loading overlay if the Unity
+          // Application is not loaded.
+          <Stack
+            sx={{
+              display: 'flex',
+              position: 'absolute',
+              width: 800,
+              height: 600,
+              minWidth: 500,
+              minHeight: 375,
+              backgroundColor: '#f1f2f7',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Typography>
+              ({t('Loading') + Math.round(loadingProgression * 100)}%)
+            </Typography>
+          </Stack>
+        )}
         <Unity
           tabIndex={-1}
           unityProvider={unityProvider}
@@ -197,6 +223,10 @@ const UnityView = (props: UnityViewProps): JSX.Element => {
             minWidth: 500,
             minHeight: 375,
           }}
+        />
+        <UnityActionReceiver
+          unityAddListener={addEventListener}
+          unityRemoveListener={removeEventListener}
         />
       </Grid>
       <Grid item xs={props.recordingComponent ? 2 : 0} />

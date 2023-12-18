@@ -1,6 +1,26 @@
 {
   "translations": {
     "Welcome to the Graasp App Starter Kit": "Welcome to the Graasp App Starter Kit",
+    "_ANALYTICS" : "================ ANALYTICS ================",
+    "Name": "Name",
+    "TrialNumero": "Trial no.",
+    "AllUsers": "All users",
+    "AllTrials": "All trials",
+    "ClickPerButton": "Number of clicks per possible interaction",
+    "NbOfClicks": "Number of clicks",
+    "TimelineXlabel": "Time (sec.)",
+    "TimelineYlabel": "Interaction name",
+    "TimelineTitle": "Timeline of users interactivities in the simulation",
+    "ReloadAnalytics": "Reload analytics",
+    "Visitors": "Visitors",
+    "VisitorsTooltip": "Unique visitors who interacted with the simulation.",
+    "MedianTrials": "Median of trials per user",
+    "MedianTrialsTooltip": "A trial corresponds to a continuous session during which the user interacts with the simulation. For example, 2 trials correspond to the user interacting once, then reconnecting a moment later (minutes, hours, days, ...) and interacting again with the simulation.",
+    "NoRating": "No rating to display",
+    "Ratings": "Ratings",
+    "RatingsTooltip": "Users can rate the simulation from 0 to 5 in Player mode.",
+    "ZoomOut": "Zoom Out",
+    "__A" : "================ ================ ================",
     "Settings": "Settings",
     "Preview": "Preview",
     "ResetDefaultSettings": "Restore default settings",
@@ -71,6 +91,7 @@
     "Mass": "mass",
     "RotationSim": "Rotation in simulation",
     "RocketReferenceFrame": "Display reference frame",
-    "Analytics": "Analytics"
+    "Analytics": "Analytics",
+    "Loading": "Loading..."
   }
 }

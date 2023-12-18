@@ -34,6 +34,7 @@ const AsteroidSettings = (): JSX.Element => {
         label={t('AsteroidCollisionForce')}
         unit={PhysicsUnits.Velocity}
         restricted
+        divider
       />
     </Stack>
   );

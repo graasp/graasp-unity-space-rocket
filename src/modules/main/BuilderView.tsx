@@ -10,6 +10,7 @@ import { PermissionLevel } from '@graasp/sdk';
 
 import { BUILDER_VIEW_CY } from '@/config/selectors';
 
+import AnalyticsView from './AnalyticsView';
 import SettingsView from './SettingsView';
 import UnityView from './UnityView';
 
@@ -54,7 +55,7 @@ const BuilderView = (): JSX.Element => {
           />
         </TabList>
         <TabPanel value={Tabs.SIM_ANALYTICS_VIEW}>
-          <Typography>Under development...</Typography>
+          <AnalyticsView />
         </TabPanel>
         <TabPanel value={Tabs.SIM_SETTINGS_VIEW}>
           {permission === PermissionLevel.Admin && <SettingsView />}

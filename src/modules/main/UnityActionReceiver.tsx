@@ -16,6 +16,7 @@ export interface UnityUserTraceProps {
     eventName: string,
     callback: (...parameters: ReactUnityEventParameter[]) => void,
   ) => void;
+  saveUnityTraceToAppAction?: boolean;
 }
 
 const UnityActionReceiver: React.FC<UnityUserTraceProps> = (
@@ -43,16 +44,18 @@ const UnityActionReceiver: React.FC<UnityUserTraceProps> = (
 
   const receiveUnityTrace = useCallback(
     (gameDataJson: void | number | string | undefined) => {
-      const newTrace = JSON.parse(gameDataJson as string);
+      if (props.saveUnityTraceToAppAction) {
+        const newTrace = JSON.parse(gameDataJson as string);
 
-      newTrace.runId = lastRunId + 1;
+        newTrace.runId = lastRunId + 1;
 
-      postAppAction({
-        data: newTrace,
-        type: UNITY_ACTION_TYPE,
-      });
+        postAppAction({
+          data: newTrace,
+          type: UNITY_ACTION_TYPE,
+        });
+      }
     },
-    [lastRunId, postAppAction],
+    [lastRunId, postAppAction, props.saveUnityTraceToAppAction],
   );
 
   useEffect(() => {

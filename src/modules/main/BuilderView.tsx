@@ -27,7 +27,7 @@ const BuilderView = (): JSX.Element => {
   const [activeTab, setActiveTab] = useState(Tabs.SIM_SETTINGS_VIEW);
 
   return (
-    <Stack width="100%" height="100%" data-cy={BUILDER_VIEW_CY}>
+    <Stack data-cy={BUILDER_VIEW_CY}>
       <TabContext data-cy={BUILDER_VIEW_CY} value={activeTab}>
         <TabList
           onChange={(_, newTabs) => setActiveTab(newTabs)}
@@ -61,7 +61,7 @@ const BuilderView = (): JSX.Element => {
           {permission === PermissionLevel.Admin && <SettingsView />}
         </TabPanel>
         <TabPanel value={Tabs.SIM_DEMO_VIEW}>
-          <UnityView recordingComponent />
+          <UnityView recordingComponent saveUnityTraceToAppAction />
         </TabPanel>
       </TabContext>
     </Stack>

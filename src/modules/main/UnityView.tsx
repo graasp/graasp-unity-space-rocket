@@ -18,6 +18,7 @@ import RestrictedNumberInput from './components/RestrictedNumberInput';
 
 export interface UnityViewProps {
   recordingComponent: boolean;
+  saveUnityTraceToAppAction?: boolean;
 }
 
 const UnityView = (props: UnityViewProps): JSX.Element => {
@@ -231,6 +232,7 @@ const UnityView = (props: UnityViewProps): JSX.Element => {
         <UnityActionReceiver
           unityAddListener={addEventListener}
           unityRemoveListener={removeEventListener}
+          saveUnityTraceToAppAction={props.saveUnityTraceToAppAction}
         />
       </Grid>
       <Grid item xs={props.recordingComponent ? 2 : 0} />

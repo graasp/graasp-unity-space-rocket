@@ -27,7 +27,7 @@ const BuilderView = (): JSX.Element => {
   const [activeTab, setActiveTab] = useState(Tabs.SIM_SETTINGS_VIEW);
 
   return (
-    <Stack data-cy={BUILDER_VIEW_CY}>
+    <Stack width="100%" height="100%" data-cy={BUILDER_VIEW_CY}>
       <TabContext data-cy={BUILDER_VIEW_CY} value={activeTab}>
         <TabList
           onChange={(_, newTabs) => setActiveTab(newTabs)}

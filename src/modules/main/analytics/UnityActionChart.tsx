@@ -22,16 +22,14 @@ export interface UnityActionProps {
 const UnityActionChart = ({ data }: UnityActionProps): JSX.Element => {
   const { t } = useTranslation();
 
-  const dataCount = Array();
-
   const dataGrouped = groupBy(data, (e) => e.objectId);
 
-  for (const [key, value] of Object.entries(dataGrouped)) {
-    dataCount.push({ objectId: key, count: value.length });
-  }
+  const dataCount = Object.entries(dataGrouped).map(([key, value]) => ({
+    objectId: key,
+    count: value.length,
+  }));
 
   // ************************** Rendering ************************** //
-
   return (
     <Stack
       direction="column"

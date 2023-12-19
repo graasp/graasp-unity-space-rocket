@@ -11,16 +11,16 @@ export enum UnityActionObjectId {
   Object0 = 'ResetButton',
   Object1 = 'PlayButton',
   Object2 = 'ZoomSlider',
-  Object3 = 'LockedOnObject',
-  Object4 = 'TopDownViewToggle',
-  Object5 = 'TraceToggle',
-  Object6 = 'RulerToggle',
-  Object7 = 'FrictionStaticSlider',
-  Object8 = 'FrictionKineticSlider',
-  Object9 = 'PushForceToggle',
-  Object10 = 'PushForceVector',
-  Object11 = 'FrictionVector',
-  Object12 = 'CubeVelocityVector',
+  Object3 = 'CameraLockedToggle',
+  Object4 = 'TraceToggle',
+  Object5 = 'VelocityVector',
+  Object6 = 'ThrustVector',
+  Object7 = 'AsteroidButton',
+  Object8 = 'ThrustButton',
+  Object9 = 'RotateRocketDown',
+  Object10 = 'RotateRocketUp',
+  Object11 = 'RotateRocketLeft',
+  Object12 = 'RotateRocketRight',
 }
 
 export interface UnityAction {
@@ -41,7 +41,10 @@ export const emptyUnityAction: UnityAction = {
 
 const computeLookupUnityId = (): Record<UnityActionObjectId, number> => {
   // This funtion is run once!
-  const lookup: Record<UnityActionObjectId, number> = {} as any;
+  const lookup: Record<UnityActionObjectId, number> = {} as Record<
+    UnityActionObjectId,
+    number
+  >;
   Object.keys(UnityActionObjectId).forEach((key, index) => {
     lookup[UnityActionObjectId[key as keyof typeof UnityActionObjectId]] =
       index;

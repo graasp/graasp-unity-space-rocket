@@ -11,13 +11,13 @@ import {
   ResponsiveContainer,
   Scatter,
   Tooltip,
-  TooltipProps,
   XAxis,
   YAxis,
 } from 'recharts';
 
 import { UnityAction, UserActionType } from '@/interfaces/unityAction';
 
+import TimeLineTooltip from './TimeLineTooltip';
 import { groupBy } from './dataUtils';
 
 const initZoomArea = {
@@ -26,11 +26,6 @@ const initZoomArea = {
   refAreaLeft: '',
   refAreaRight: '',
 };
-
-interface CustomTooltipProps extends TooltipProps<any, any> {
-  label?: string;
-  payload?: any[];
-}
 
 export interface UnityActionProps {
   data: Array<UnityAction>;
@@ -44,15 +39,13 @@ const UnityActionTimeLine = ({ data }: UnityActionProps): JSX.Element => {
 
   const dataGrouped = groupBy(data, (e) => e.runId);
 
-  for (const [key, value] of Object.entries(dataGrouped)) {
-    for (let i = 0; i < value.length; i++) {
-      const { actionType, time, objectId, extra, runId } = value[i];
-
+  Object.entries(dataGrouped).forEach(([, value]) => {
+    value.forEach(({ actionType, time, objectId, extra, runId }, i) => {
       if (actionType === UserActionType.Click) {
         points.push(
           <Scatter
             key={`${objectId}-${runId}-${i}`}
-            data={[{ time: time, objectId: objectId, extra: extra }]}
+            data={[{ time, objectId, extra }]}
             dataKey="objectId"
             fill="#8884d8"
             shape="circle"
@@ -63,10 +56,9 @@ const UnityActionTimeLine = ({ data }: UnityActionProps): JSX.Element => {
         const extraList = extra as string[];
         const dataForLine = (time as number[]).map((val, index) => ({
           time: val,
-          objectId: objectId,
+          objectId,
           extra: extraList[index],
         }));
-
         lines.push(
           <Line
             key={`${objectId}-${runId}-${i}`}
@@ -78,13 +70,13 @@ const UnityActionTimeLine = ({ data }: UnityActionProps): JSX.Element => {
           />,
         );
       }
-    }
-  }
+    });
+  });
 
   // ************************** ZOOM ************************** //
   const [zoomArea, setZoomArea] = useState(initZoomArea);
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (): void => {
     let { refAreaLeft, refAreaRight } = zoomArea;
 
     if (refAreaLeft === refAreaRight || refAreaRight === '') {
@@ -107,35 +99,35 @@ const UnityActionTimeLine = ({ data }: UnityActionProps): JSX.Element => {
     });
   };
 
-  const zoomOut = () => {
+  const zoomOut = (): void => {
     setZoomArea(initZoomArea);
   };
 
   // ************************** Tooltip ************************** //
-  const CustomTooltip: React.FC<CustomTooltipProps> = ({
-    active,
-    label,
-    payload,
-  }) => {
-    if (active && payload && payload.length) {
-      return (
-        <Stack>
-          <Typography>{`${t('TimelineYlabel')}: ${payload[0]
-            ?.value}`}</Typography>
-          <Typography>{`${t('TimelineXlabel')}: ${label}`}</Typography>
-          <Typography>{`Extra: ${JSON.stringify(payload[0].payload.extra)
-            .replace(/"([^"]+)":/g, '$1: ')
-            // Remove double quotes around string values
-            .replace(/"([^"]+)"/g, '$1')
-            // Add a space after commas
-            .replace(/,/g, ', ')
-            .replace(/[{}]/g, '')}`}</Typography>
-        </Stack>
-      );
-    }
+  // const CustomTooltip: React.FC<CustomTooltipProps> = ({
+  //   active,
+  //   label,
+  //   payload,
+  // }) => {
+  //   if (active && payload && payload.length) {
+  //     return (
+  //       <Stack>
+  //         <Typography>{`${t('TimelineYlabel')}: ${payload[0]
+  //           ?.value}`}</Typography>
+  //         <Typography>{`${t('TimelineXlabel')}: ${label}`}</Typography>
+  //         <Typography>{`Extra: ${JSON.stringify(payload[0].payload.extra)
+  //           .replace(/"([^"]+)":/g, '$1: ')
+  //           // Remove double quotes around string values
+  //           .replace(/"([^"]+)"/g, '$1')
+  //           // Add a space after commas
+  //           .replace(/,/g, ', ')
+  //           .replace(/[{}]/g, '')}`}</Typography>
+  //       </Stack>
+  //     );
+  //   }
 
-    return null;
-  };
+  //   return null;
+  // };
 
   // ************************** Rendering ************************** //
 
@@ -174,7 +166,7 @@ const UnityActionTimeLine = ({ data }: UnityActionProps): JSX.Element => {
         >
           <CartesianGrid stroke="#f5f5f5" />
           <Tooltip
-            content={CustomTooltip}
+            content={<TimeLineTooltip />}
             wrapperStyle={{
               backgroundColor: 'white',
               padding: 7,

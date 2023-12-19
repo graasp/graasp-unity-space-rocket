@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Analytics, Settings, ViewInArOutlined } from '@mui/icons-material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { Stack, Tab, Typography } from '@mui/material';
+import { Stack, Tab } from '@mui/material';
 
 import { useLocalContext } from '@graasp/apps-query-client';
 import { PermissionLevel } from '@graasp/sdk';

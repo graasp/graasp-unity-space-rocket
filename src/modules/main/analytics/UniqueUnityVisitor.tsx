@@ -20,26 +20,25 @@ const UniqueUnityVisitor = (): JSX.Element => {
   const { data: appActions } = hooks.useAppActions();
   const { data: appData } = hooks.useAppData();
 
-  //********************** All Users ********************** //
+  // ********************** All Users ********************** //
   const [allUnityUsers, setAllUnityUsers] = useState(0);
 
-  const getAllUnityUsers = (): number => {
-    const actionsSet = appActions
-      ?.filter((a) => a.type === UNITY_ACTION_TYPE)
-      ?.map((action) => {
-        action.member.id;
-      });
-
-    const ratingSet = appData
-      ?.filter((a) => a.type === RATING_UNITY_TYPE)
-      ?.map((d) => {
-        d.creator?.id;
-      });
-
-    return new Set(actionsSet?.concat(ratingSet)).size;
-  };
-
   useEffect(() => {
+    const getAllUnityUsers = (): number => {
+      const actionsSet = appActions
+        ?.filter((a) => a.type === UNITY_ACTION_TYPE)
+        ?.map((action) => action.member.id);
+
+      const ratingSet = appData
+        ?.filter((a) => a.type === RATING_UNITY_TYPE)
+        ?.map((d) => d.creator?.id)
+        ?.filter((id): id is string => id !== null && id !== undefined);
+
+      if (ratingSet) return new Set(actionsSet?.concat(ratingSet)).size;
+
+      return 0;
+    };
+
     setAllUnityUsers(getAllUnityUsers());
   }, [appActions, appData]);
 

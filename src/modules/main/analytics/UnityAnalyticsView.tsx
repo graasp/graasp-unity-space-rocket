@@ -40,14 +40,10 @@ const UnityAnalyticsView = (): JSX.Element => {
     id: ALL_USERS_ID,
   };
 
-  //********************** All Users ********************** //
+  // ********************** All Users ********************** //
   const [allActionUsers, setAllActionUsers] = React.useState(
     new Set<ReduceMemberInfo>(),
   );
-
-  useEffect(() => {
-    setAllActionUsers(getAllUsers());
-  }, [appActions]);
 
   const getAllUsers = (): Set<ReduceMemberInfo> => {
     const userSet = new Map(
@@ -63,46 +59,34 @@ const UnityAnalyticsView = (): JSX.Element => {
     return new Set();
   };
 
+  useEffect(() => {
+    setAllActionUsers(getAllUsers());
+  }, [appActions]);
+
   // ********************** User Selection ********************** //
   const [selectedUser, setSelectedUser] = React.useState(ALL_USERS_ID);
 
-  function handleUserChange(e: SelectChangeEvent) {
-    console.log(e.target);
+  const handleUserChange = (e: SelectChangeEvent): void => {
     setSelectedUser(e.target.value);
-  }
+  };
 
   // ********************** All User run possible ***************** //
   const [allSelectedUserRun, setAllSelectedUserRun] = React.useState(
     new Set<string>(),
   );
 
-  useEffect(() => {
-    setAllSelectedUserRun(getAllUserRunId());
-  }, [selectedUser]);
-
-  // ********************** Run Id Selection ********************** //
-  const [selectedUserRun, setSelectedUserRun] = React.useState(AllKey);
-
-  function handleRunChange(e: SelectChangeEvent) {
-    setSelectedUserRun(e.target.value);
-  }
-
   const getAllUserRunId = (): Set<string> => {
     let prevUnityTrace;
     if (selectedUser === ALL_USERS_ID) {
       prevUnityTrace = appActions
         ?.filter((a) => a.type === UNITY_ACTION_TYPE)
-        ?.map((action) => {
-          return (action.data as UnityAction).runId;
-        });
+        ?.map((action) => (action.data as UnityAction).runId);
     } else {
       prevUnityTrace = appActions
         ?.filter(
           (a) => a.type === UNITY_ACTION_TYPE && a.member.id === selectedUser,
         )
-        ?.map((action) => {
-          return (action.data as UnityAction).runId;
-        });
+        ?.map((action) => (action.data as UnityAction).runId);
     }
 
     let runList = [''];
@@ -112,6 +96,17 @@ const UnityAnalyticsView = (): JSX.Element => {
     }
 
     return new Set(runList);
+  };
+
+  useEffect(() => {
+    setAllSelectedUserRun(getAllUserRunId());
+  }, [selectedUser]);
+
+  // ********************** Run Id Selection ********************** //
+  const [selectedUserRun, setSelectedUserRun] = React.useState(AllKey);
+
+  const handleRunChange = (e: SelectChangeEvent): void => {
+    setSelectedUserRun(e.target.value);
   };
 
   // ********************** Data Processing ********************** //
@@ -127,11 +122,11 @@ const UnityAnalyticsView = (): JSX.Element => {
       );
     }
 
-    prevUnityTrace = prevUnityTrace?.map((action) => {
-      return action.data as UnityAction;
-    });
+    prevUnityTrace = prevUnityTrace?.map(
+      (action) => action.data as UnityAction,
+    );
 
-    if (selectedUserRun != AllTrialsKey) {
+    if (selectedUserRun !== AllTrialsKey) {
       prevUnityTrace = prevUnityTrace?.filter(
         (a) => a.runId === Number(selectedUserRun),
       );

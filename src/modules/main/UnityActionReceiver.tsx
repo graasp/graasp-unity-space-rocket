@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { ReactUnityEventParameter } from 'react-unity-webgl/distribution/types/react-unity-event-parameters';
 
 import { useLocalContext } from '@graasp/apps-query-client';
@@ -23,7 +23,7 @@ const UnityActionReceiver: React.FC<UnityUserTraceProps> = (
 ) => {
   const context = useLocalContext();
   const { mutate: postAppAction } = mutations.usePostAppAction();
-  const { data: appActions, refetch } = hooks.useAppActions();
+  const { data: appActions } = hooks.useAppActions();
 
   function GetLastRunId(): number {
     const prevUnityTrace = appActions?.filter(
@@ -33,32 +33,25 @@ const UnityActionReceiver: React.FC<UnityUserTraceProps> = (
     if (prevUnityTrace === undefined || prevUnityTrace?.length === 0) {
       return -1;
     }
-    //console.log(prevUnityTrace.map((a: AppAction) => (a.data as UnityAction).runId));
     return Math.max(
       ...prevUnityTrace.map((a: AppAction) => (a.data as UnityAction).runId),
     );
   }
 
-  const lastRunId = GetLastRunId();
-
-  function postNewUnityAction(
-    gameDataJson: void | number | string | undefined,
-  ): void {
-    const newTrace = JSON.parse(gameDataJson as string);
-
-    newTrace.runId = lastRunId + 1;
-
-    postAppAction({
-      data: newTrace,
-      type: UNITY_ACTION_TYPE,
-    });
-  }
+  const lastRunId = useMemo(() => GetLastRunId(), []);
 
   const receiveUnityTrace = useCallback(
     (gameDataJson: void | number | string | undefined) => {
-      postNewUnityAction(gameDataJson);
+      const newTrace = JSON.parse(gameDataJson as string);
+
+      newTrace.runId = lastRunId + 1;
+
+      postAppAction({
+        data: newTrace,
+        type: UNITY_ACTION_TYPE,
+      });
     },
-    [],
+    [lastRunId, postAppAction],
   );
 
   useEffect(() => {

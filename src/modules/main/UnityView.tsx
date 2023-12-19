@@ -190,21 +190,25 @@ const UnityView = (props: UnityViewProps): JSX.Element => {
       <Grid
         item
         xs={props.recordingComponent ? 8 : 12}
-        display="flex"
         justifyContent="center"
+        sx={{ textAlign: 'center' }}
       >
         {isLoaded === false && (
           // We'll conditionally render the loading overlay if the Unity
           // Application is not loaded.
-          <Stack
-            sx={{
-              display: 'flex',
-              position: 'absolute',
-              width: 800,
-              height: 600,
+          <div
+            style={{
+              position: 'relative',
+              width: '80%',
+              aspectRatio: 4 / 3,
               minWidth: 500,
               minHeight: 375,
               backgroundColor: '#f1f2f7',
+              border: 1,
+              textAlign: 'center', // Center the content horizontally
+              alignSelf: 'center', // Center the content vertically
+              display: 'flex',
+              flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
             }}
@@ -212,14 +216,14 @@ const UnityView = (props: UnityViewProps): JSX.Element => {
             <Typography>
               ({t('Loading') + Math.round(loadingProgression * 100)}%)
             </Typography>
-          </Stack>
+          </div>
         )}
         <Unity
           tabIndex={-1}
           unityProvider={unityProvider}
           style={{
-            width: 800,
-            height: 600,
+            width: '80%',
+            aspectRatio: 4 / 3,
             minWidth: 500,
             minHeight: 375,
           }}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { InfoOutlined } from '@mui/icons-material';
@@ -11,8 +11,13 @@ import {
   Typography,
 } from '@mui/material';
 
-import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
-import { Tooltip as RechartsTooltip } from 'recharts';
+import {
+  Cell,
+  Pie,
+  PieChart,
+  Tooltip as RechartsTooltip,
+  ResponsiveContainer,
+} from 'recharts';
 
 import { hooks } from '@/config/queryClient';
 import { RATING_UNITY_TYPE } from '@/interfaces/unityAction';
@@ -25,43 +30,80 @@ interface PieData {
   percentage?: number;
 }
 
+interface CustomLabelProps {
+  cx: number;
+  cy: number;
+  midAngle: number;
+  innerRadius: number;
+  outerRadius: number;
+  value: number;
+  index: number;
+  payload: PieData;
+}
+
+const CustomLabel: React.FC<CustomLabelProps> = ({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  payload,
+}) => {
+  const { rating } = payload;
+  const radius = innerRadius + (outerRadius - innerRadius) * 2.2;
+  const x = cx + radius * Math.cos(-midAngle * (Math.PI / 180));
+  const y = cy + radius * Math.sin(-midAngle * (Math.PI / 180));
+
+  return (
+    <text
+      x={x}
+      y={y}
+      fill="#82ca9d"
+      textAnchor={x > cx ? 'start' : 'end'}
+      dominantBaseline="central"
+    >
+      {`${rating}`}
+    </text>
+  );
+};
+
 const SimulationRatings = (): JSX.Element => {
   const { t } = useTranslation();
 
   const { data: appData } = hooks.useAppData();
 
-  function GetAllRatings(): PieData[] {
+  const GetAllRatings = useCallback(() => {
     const allRatings = appData
       ?.filter((m) => m.type === RATING_UNITY_TYPE)
       .map((e) => Number(e.data.rating));
 
-    let dataCount = Array();
-    if (allRatings) {
+    let dataCount: PieData[] = [];
+
+    if (allRatings && allRatings.length > 0) {
       const dataGrouped = groupBy(allRatings, (e) => e);
 
-      for (const [key, value] of Object.entries(dataGrouped)) {
+      dataCount = Object.keys(dataGrouped).map((key) => {
         const numericKey = Number(key);
-        dataCount.push({ rating: numericKey, count: value.length });
-      }
+        const value = dataGrouped[Number(key)];
+        return { rating: numericKey, count: value.length };
+      });
     }
 
     const totalCount = dataCount.reduce((sum, item) => sum + item.count, 0);
 
-    let dataWithPercentage = dataCount.map((item) => ({
+    const dataWithPercentage = dataCount.map((item) => ({
       ...item,
-      percentage: (item.count / totalCount) * 100,
+      percentage: totalCount !== 0 ? (item.count / totalCount) * 100 : 0,
     }));
 
     return dataWithPercentage;
-  }
-
-  const [dataRatings, setDataRatings] = useState(GetAllRatings());
-
-  useEffect(() => {
-    setDataRatings(GetAllRatings());
   }, [appData]);
 
-  console.log(dataRatings);
+  const [dataRatings, setDataRatings] = useState(GetAllRatings);
+
+  useEffect(() => {
+    setDataRatings(GetAllRatings);
+  }, [GetAllRatings]);
 
   // ************************** Rendering ************************** //
 
@@ -89,37 +131,10 @@ const SimulationRatings = (): JSX.Element => {
                 dataKey="count"
                 cx="50%"
                 cy="50%"
-                outerRadius={'70%'}
-                innerRadius={'50%'}
+                outerRadius="70%"
+                innerRadius="50%"
                 fill="#82ca9d"
-                label={({
-                  cx,
-                  cy,
-                  midAngle,
-                  innerRadius,
-                  outerRadius,
-                  value,
-                  index,
-                  payload,
-                }) => {
-                  const rating = payload.rating;
-                  const radius =
-                    innerRadius + (outerRadius - innerRadius) * 2.2;
-                  const x = cx + radius * Math.cos(-midAngle * (Math.PI / 180));
-                  const y = cy + radius * Math.sin(-midAngle * (Math.PI / 180));
-
-                  return (
-                    <text
-                      x={x}
-                      y={y}
-                      fill="#82ca9d"
-                      textAnchor={x > cx ? 'start' : 'end'}
-                      dominantBaseline="central"
-                    >
-                      {`${rating}`}
-                    </text>
-                  );
-                }}
+                label={CustomLabel}
               >
                 {dataRatings.map((entry, index) => (
                   <Cell key={`cell-${index}`} />

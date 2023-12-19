@@ -1,10 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Stack, TooltipProps, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-interface TimeLineTooltipProps extends TooltipProps<any, any> {
+interface TimeLineTooltipProps {
   label?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   payload?: any[];

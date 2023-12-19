@@ -103,32 +103,6 @@ const UnityActionTimeLine = ({ data }: UnityActionProps): JSX.Element => {
     setZoomArea(initZoomArea);
   };
 
-  // ************************** Tooltip ************************** //
-  // const CustomTooltip: React.FC<CustomTooltipProps> = ({
-  //   active,
-  //   label,
-  //   payload,
-  // }) => {
-  //   if (active && payload && payload.length) {
-  //     return (
-  //       <Stack>
-  //         <Typography>{`${t('TimelineYlabel')}: ${payload[0]
-  //           ?.value}`}</Typography>
-  //         <Typography>{`${t('TimelineXlabel')}: ${label}`}</Typography>
-  //         <Typography>{`Extra: ${JSON.stringify(payload[0].payload.extra)
-  //           .replace(/"([^"]+)":/g, '$1: ')
-  //           // Remove double quotes around string values
-  //           .replace(/"([^"]+)"/g, '$1')
-  //           // Add a space after commas
-  //           .replace(/,/g, ', ')
-  //           .replace(/[{}]/g, '')}`}</Typography>
-  //       </Stack>
-  //     );
-  //   }
-
-  //   return null;
-  // };
-
   // ************************** Rendering ************************** //
 
   return (
@@ -177,7 +151,6 @@ const UnityActionTimeLine = ({ data }: UnityActionProps): JSX.Element => {
               borderColor: '#C4C4C4',
             }}
           />
-          {/* // value from btn true or false, components from vectors... */}
 
           <XAxis
             dataKey="time"

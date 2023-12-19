@@ -23,32 +23,28 @@ const UserUnityRunStats = (): JSX.Element => {
 
   const [medianOfRuns, setMedianOfRuns] = useState(0);
 
-  const getMedianOfRunsByUsers = (): number => {
-    const dataUserRun = appActions
-      ?.filter((a) => a.type === UNITY_ACTION_TYPE)
-      ?.map((action) => {
-        return {
+  useEffect(() => {
+    const getMedianOfRunsByUsers = (): number => {
+      const dataUserRun = appActions
+        ?.filter((a) => a.type === UNITY_ACTION_TYPE)
+        ?.map((action) => ({
           MemberId: action.member.id,
           runId: (action.data as UnityAction).runId,
-        };
-      });
+        }));
 
-    if (dataUserRun) {
-      const dataUserRunGrouped = groupBy(dataUserRun, (e) => e.MemberId);
+      if (dataUserRun) {
+        const dataUserRunGrouped = groupBy(dataUserRun, (e) => e.MemberId);
 
-      console.log(dataUserRunGrouped);
+        const nbRunByUser = Object.values(dataUserRunGrouped).map(
+          (value) => new Set(value.map((e) => e.runId)).size,
+        );
 
-      const nbRunByUser = [];
-      for (const [key, value] of Object.entries(dataUserRunGrouped)) {
-        nbRunByUser.push(new Set(value.map((e) => e.runId)).size);
+        return median(nbRunByUser);
       }
-      return median(nbRunByUser);
-    }
 
-    return 0;
-  };
+      return 0;
+    };
 
-  useEffect(() => {
     setMedianOfRuns(getMedianOfRunsByUsers());
   }, [appActions]);
 

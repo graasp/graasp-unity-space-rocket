@@ -38,6 +38,7 @@ const UnityActionReceiver: React.FC<UnityUserTraceProps> = (
     );
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const lastRunId = useMemo(() => GetLastRunId(), []);
 
   const receiveUnityTrace = useCallback(

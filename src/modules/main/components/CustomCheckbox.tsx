@@ -71,9 +71,7 @@ const CustomCheckbox = (props: CustomCheckboxProps): JSX.Element => {
       >
         {props.icon}
         <Typography width="80%" sx={{ wordWrap: 'break-word' }}>
-          <Stack direction="row" alignItems="center">
-            {props.label}
-          </Stack>
+          {props.label}
         </Typography>
         <Checkbox
           checked={GetSettingFromPath()}

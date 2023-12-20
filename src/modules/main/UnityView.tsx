@@ -13,10 +13,12 @@ import { DEFAULT_UNITY_SETTINGS } from '@/config/settings';
 import { UNITY_SETTINGS_NAME } from '@/interfaces/settings';
 
 import { useSettings } from '../context/SettingsContext';
+import UnityActionReceiver from './UnityActionReceiver';
 import RestrictedNumberInput from './components/RestrictedNumberInput';
 
 export interface UnityViewProps {
   recordingComponent: boolean;
+  saveUnityTraceToAppAction?: boolean;
 }
 
 const UnityView = (props: UnityViewProps): JSX.Element => {
@@ -28,6 +30,7 @@ const UnityView = (props: UnityViewProps): JSX.Element => {
     addEventListener,
     removeEventListener,
     isLoaded,
+    loadingProgression,
   } = useUnityContext({
     loaderUrl: './BuildSpaceRocket/Build/BuildSpaceRocket.loader.js',
     dataUrl: './BuildSpaceRocket/Build/BuildSpaceRocket.data',
@@ -126,6 +129,9 @@ const UnityView = (props: UnityViewProps): JSX.Element => {
   };
 
   // ************************ ********************* ************************ //
+
+  // ************************ ********************* ************************ //
+
   return (
     <Grid container direction="row" width="100%" minHeight="100%">
       <Grid
@@ -185,18 +191,48 @@ const UnityView = (props: UnityViewProps): JSX.Element => {
       <Grid
         item
         xs={props.recordingComponent ? 8 : 12}
-        display="flex"
         justifyContent="center"
+        sx={{ textAlign: 'center' }}
       >
+        {isLoaded === false && (
+          // We'll conditionally render the loading overlay if the Unity
+          // Application is not loaded.
+          <div
+            style={{
+              position: 'relative',
+              width: '80%',
+              aspectRatio: 4 / 3,
+              minWidth: 500,
+              minHeight: 375,
+              backgroundColor: '#f1f2f7',
+              border: 1,
+              textAlign: 'center', // Center the content horizontally
+              alignSelf: 'center', // Center the content vertically
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Typography>
+              ({t('Loading') + Math.round(loadingProgression * 100)}%)
+            </Typography>
+          </div>
+        )}
         <Unity
           tabIndex={-1}
           unityProvider={unityProvider}
           style={{
-            width: 800,
-            height: 600,
+            width: '80%',
+            aspectRatio: 4 / 3,
             minWidth: 500,
             minHeight: 375,
           }}
+        />
+        <UnityActionReceiver
+          unityAddListener={addEventListener}
+          unityRemoveListener={removeEventListener}
+          saveUnityTraceToAppAction={props.saveUnityTraceToAppAction}
         />
       </Grid>
       <Grid item xs={props.recordingComponent ? 2 : 0} />

@@ -45,7 +45,7 @@ const RestrictedNumberInput = (
         value={inputValue}
         onChange={onInputChange}
         size="small"
-        sx={{ width: '40%', minWidth: '60px' }}
+        sx={{ width: '40%', minWidth: '80px' }}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">{props.unit}</InputAdornment>

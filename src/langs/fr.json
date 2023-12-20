@@ -1,6 +1,26 @@
 {
   "translations": {
     "Welcome to the Graasp App Starter Kit": "Bienvenue dans le kit de démarrage de l'application Graasp",
+    "_ANALYTICS" : "================ ANALYTICS ================",
+    "Name": "Nom",
+    "TrialNumero": "Essai no.",
+    "AllUsers": "Tous les utilisateurs",
+    "AllTrials": "Tous les essais",
+    "ClickPerButton": "Nombre de clics par interaction possible",
+    "NbOfClicks": "Nombre de clics",
+    "TimelineXlabel": "Temps (sec.)",
+    "TimelineYlabel": "Nom de l'interaction",
+    "TimelineTitle": "Chronologie des interactivités utilisateurs dans la simulation",
+    "ReloadAnalytics": "Recharger les analyses",
+    "Visitors": "Visiteurs",
+    "VisitorsTooltip": "Visiteurs uniques ayant interagi avec la simulation.",
+    "MedianTrials": "Médiane des essais par utilisateur",
+    "MedianTrialsTooltip": "Un essai correspond à une session continue au cours de laquelle l'utilisateur interagit avec la simulation. Par exemple, 2 essais correspondent au fait que l'utilisateur interagisse une fois, puis se reconnecte un moment plus tard (minutes, heures, jours, ...) et interagisse à nouveau avec la simulation.",
+    "NoRating": "Aucune note à afficher",
+    "Ratings": "Notes",
+    "RatingsTooltip": "Les utilisateurs peuvent noter la simulation de 0 à 5 en mode \"Player\".",
+    "ZoomOut": "Dézoom",
+    "__A" : "================ ================ ================",
     "Settings": "Réglages",
     "Preview": "Aperçu",
     "ResetDefaultSettings": "Rétablir les paramètres par défaut",
@@ -40,7 +60,7 @@
     "ShowVector": "Afficher le vecteur",
     "ShowLabel": "Afficher le label",
     "ShowThrustVector": "Afficher le vecteur de poussée",
-    "ShowThrustLabel": "Display thrust label",
+    "ShowThrustLabel": "Afficher le nom du vecteur de poussée",
     "ShowEquation": "Afficher les valeurs des composants de la force",
     "InitialMagnitude": "Magnitude de la pousée",
     "AsteroidSettings": "Paramètres des astéroïdes",
@@ -71,6 +91,7 @@
     "Mass": "masse",
     "RotationSim": "Rotation dans la simulation",
     "RocketReferenceFrame": "Afficher le référentiel",
-    "Analytics": "Analytiques"
+    "Analytics": "Analytiques",
+    "Loading": "Chargement..."
   }
 }

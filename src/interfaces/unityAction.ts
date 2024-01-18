@@ -38,23 +38,3 @@ export const emptyUnityAction: UnityAction = {
   extra: '',
   runId: 0,
 };
-
-const computeLookupUnityId = (): Record<UnityActionObjectId, number> => {
-  // This funtion is run once!
-  const lookup: Record<UnityActionObjectId, number> = {} as Record<
-    UnityActionObjectId,
-    number
-  >;
-  Object.keys(UnityActionObjectId).forEach((key, index) => {
-    lookup[UnityActionObjectId[key as keyof typeof UnityActionObjectId]] =
-      index;
-  });
-  return lookup;
-};
-
-const unityObjectIdToNumber: Record<UnityActionObjectId, number> = (() => {
-  const result = computeLookupUnityId();
-  return result;
-})();
-
-export { unityObjectIdToNumber };

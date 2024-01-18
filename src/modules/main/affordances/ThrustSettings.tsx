@@ -30,8 +30,10 @@ const ThrustSettings = (): JSX.Element => {
           UnitySettingsKeys.InitialMagnitude,
         ]}
         label={t('InitialMagnitude')}
+        icon={<Icon />}
         unit={PhysicsUnits.Force}
         restricted
+        divider
       />
       <CustomCheckbox
         path={[UnitySettingsKeys.ThrustForce, UnitySettingsKeys.IsActive]}

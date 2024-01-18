@@ -3,13 +3,14 @@ import { useTranslation } from 'react-i18next';
 
 import { Analytics, Settings, ViewInArOutlined } from '@mui/icons-material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { Stack, Tab, Typography } from '@mui/material';
+import { Stack, Tab } from '@mui/material';
 
 import { useLocalContext } from '@graasp/apps-query-client';
 import { PermissionLevel } from '@graasp/sdk';
 
 import { BUILDER_VIEW_CY } from '@/config/selectors';
 
+import AnalyticsView from './AnalyticsView';
 import SettingsView from './SettingsView';
 import UnityView from './UnityView';
 
@@ -54,13 +55,13 @@ const BuilderView = (): JSX.Element => {
           />
         </TabList>
         <TabPanel value={Tabs.SIM_ANALYTICS_VIEW}>
-          <Typography>Under development...</Typography>
+          <AnalyticsView />
         </TabPanel>
         <TabPanel value={Tabs.SIM_SETTINGS_VIEW}>
           {permission === PermissionLevel.Admin && <SettingsView />}
         </TabPanel>
         <TabPanel value={Tabs.SIM_DEMO_VIEW}>
-          <UnityView recordingComponent />
+          <UnityView recordingComponent saveUnityTraceToAppAction />
         </TabPanel>
       </TabContext>
     </Stack>

@@ -1,4 +1,13 @@
-import { Button, Stack, TextField, Typography } from '@mui/material';
+import { ReactNode } from 'react';
+
+import {
+  Box,
+  Button,
+  Divider,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
 
 import { DEFAULT_UNITY_SETTINGS } from '@/config/settings';
 import {
@@ -12,19 +21,23 @@ import { useSettings } from '../../context/SettingsContext';
 export interface NumberInputProps {
   path: UnitySettingsKeys[]; // list of Keys defining path to the settings to update.
   label: string;
+  icon?: ReactNode;
   unit?: string;
   restricted?: boolean;
   minValue?: number;
   maxValue?: number;
+  divider?: boolean;
 }
 
 const NumberInput = ({
   path,
   label,
+  icon,
   unit,
   restricted = false,
   minValue = 0,
   maxValue = 100,
+  divider,
 }: NumberInputProps): JSX.Element => {
   const {
     [UNITY_SETTINGS_NAME]: settings = DEFAULT_UNITY_SETTINGS,
@@ -77,32 +90,50 @@ const NumberInput = ({
   };
 
   return (
-    <Stack
-      direction="row"
-      justifyContent="center"
-      alignItems="center"
-      spacing={1}
-    >
-      <Typography>{label}: </Typography>
-      <TextField
-        id="outlined-basic"
-        // InputLabelProps={{ shrink: true }}
-        value={GetValue()}
-        onChange={onInputChange}
-      />
-      <Button
-        color="primary"
-        sx={{
-          borderRadius: '50%',
-          minWidth: 0,
-          width: '50px',
-          height: '50px',
-          p: '2px',
-        }}
+    <Box width="100%">
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={2}
       >
-        {unit}
-      </Button>
-    </Stack>
+        {icon}
+        <Typography width="60%" sx={{ wordWrap: 'break-word' }}>
+          {label}
+        </Typography>
+        <TextField
+          id="outlined-basic"
+          // InputLabelProps={{ shrink: true }}
+          value={GetValue()}
+          onChange={onInputChange}
+          sx={{
+            minWidth: '50px',
+            width: '20%',
+          }}
+        />
+        {unit && (
+          <Button
+            color="primary"
+            sx={{
+              borderRadius: '50%',
+              minWidth: 0,
+              width: '50px',
+              height: '50px',
+              p: '2px',
+              marginRight: 0,
+            }}
+          >
+            {unit}
+          </Button>
+        )}
+      </Stack>
+      {divider && (
+        <Divider
+          variant="middle"
+          sx={{ paddingTop: '5px', marginLeft: '10px' }}
+        />
+      )}
+    </Box>
   );
 };
 

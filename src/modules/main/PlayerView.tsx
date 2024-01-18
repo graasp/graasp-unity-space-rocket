@@ -6,6 +6,7 @@ import { useLocalContext } from '@graasp/apps-query-client';
 
 import { hooks, mutations } from '@/config/queryClient';
 import { PLAYER_VIEW_CY } from '@/config/selectors';
+import { RATING_UNITY_TYPE } from '@/interfaces/unityAction';
 
 import UnityView from './UnityView';
 
@@ -19,7 +20,8 @@ const PlayerView = (): JSX.Element => {
 
   const getPreviousRating = (): number | null => {
     const previousRating = appData?.find(
-      (m) => m.type === 'rating-action' && m?.creator?.id === context?.memberId,
+      (m) =>
+        m.type === RATING_UNITY_TYPE && m?.creator?.id === context?.memberId,
     );
     // setting does not exist
     if (!previousRating) {
@@ -32,11 +34,11 @@ const PlayerView = (): JSX.Element => {
     if (appData) {
       const previousRating = appData.find(
         (m) =>
-          m.type === 'rating-action' && m?.creator?.id === context?.memberId,
+          m.type === RATING_UNITY_TYPE && m?.creator?.id === context?.memberId,
       );
       // setting does not exist
       if (!previousRating) {
-        postAppData({ data: { rating: ratingValue }, type: 'rating-action' });
+        postAppData({ data: { rating: ratingValue }, type: RATING_UNITY_TYPE });
       } else {
         patchAppData({
           id: previousRating?.id || '',
@@ -49,7 +51,7 @@ const PlayerView = (): JSX.Element => {
   return (
     <div data-cy={PLAYER_VIEW_CY}>
       <Stack sx={{ m: 5 }}>
-        <UnityView recordingComponent />
+        <UnityView recordingComponent saveUnityTraceToAppAction />
       </Stack>
       <Stack
         direction="column"

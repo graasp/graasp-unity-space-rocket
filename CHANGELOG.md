@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/graasp/graasp-unity-space-rocket/compare/v1.1.0...v1.1.1) (2024-01-18)
+
+
+### Bug Fixes
+
+* update apps-query-client for resizing ([#11](https://github.com/graasp/graasp-unity-space-rocket/issues/11)) ([6df5cc9](https://github.com/graasp/graasp-unity-space-rocket/commit/6df5cc99b81e0dabfff3836803811f6c66a568b5))
+* update title and description in index.html ([#9](https://github.com/graasp/graasp-unity-space-rocket/issues/9)) ([0d6f3a3](https://github.com/graasp/graasp-unity-space-rocket/commit/0d6f3a3a7228f8da437d8155e3443080bbe5f789))
+
 ## [1.1.0](https://github.com/graasp/graasp-unity-space-rocket/compare/v1.0.0...v1.1.0) (2023-12-08)
 
 

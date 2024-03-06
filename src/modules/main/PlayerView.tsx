@@ -50,7 +50,7 @@ const PlayerView = (): JSX.Element => {
 
   return (
     <div data-cy={PLAYER_VIEW_CY}>
-      <Stack sx={{ m: 5 }}>
+      <Stack>
         <UnityView recordingComponent saveUnityTraceToAppAction />
       </Stack>
       <Stack

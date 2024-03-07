@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: set up node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: 20
 
       - name: Yarn Install and Cache
         uses: graasp/graasp-deploy/.github/actions/yarn-install-and-cache@v1
@@ -24,7 +24,7 @@ jobs:
           cypress: true
 
       - name: cypress run
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v6
         env:
           VITE_PORT: 3000
           VITE_API_HOST: http://localhost:3636
@@ -49,7 +49,7 @@ jobs:
       #     # to run component tests we need to use "component: true"
       #     component: true
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: cypress-screenshots

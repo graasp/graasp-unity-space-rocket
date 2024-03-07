@@ -7,6 +7,7 @@ import {
 } from '@graasp/sdk';
 
 import { API_HOST } from '@/config/env';
+import { DEFAULT_LANG } from '@/config/i18n';
 
 export const defaultMockContext: LocalContext = {
   apiHost: API_HOST,
@@ -43,6 +44,7 @@ export const mockItem: DiscriminatedItem = {
   description: null,
   path: '',
   settings: {},
+  lang: DEFAULT_LANG,
   type: ItemType.APP,
   extra: { [ItemType.APP]: { url: 'http://localhost:3002' } },
   creator: mockMembers[0],

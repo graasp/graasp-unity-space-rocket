@@ -23,13 +23,13 @@ export enum UnityActionObjectId {
   Object12 = 'RotateRocketRight',
 }
 
-export interface UnityAction {
+export type UnityAction = {
   time: number | Array<number>;
   objectId: UnityActionObjectId;
   actionType: UserActionType;
   extra: string | boolean | string[];
   runId: number;
-}
+};
 
 export const emptyUnityAction: UnityAction = {
   time: 0,

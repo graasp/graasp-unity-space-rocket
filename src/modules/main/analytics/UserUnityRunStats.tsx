@@ -11,6 +11,8 @@ import {
   Typography,
 } from '@mui/material';
 
+import { AppAction } from '@graasp/sdk';
+
 import { hooks } from '@/config/queryClient';
 import { UNITY_ACTION_TYPE, UnityAction } from '@/interfaces/unityAction';
 
@@ -25,12 +27,14 @@ const UserUnityRunStats = (): JSX.Element => {
 
   useEffect(() => {
     const getMedianOfRunsByUsers = (): number => {
-      const dataUserRun = appActions
-        ?.filter((a) => a.type === UNITY_ACTION_TYPE)
-        ?.map((action) => ({
-          MemberId: action.member.id,
-          runId: (action.data as UnityAction).runId,
-        }));
+      const dataUserRun = (
+        appActions?.filter((a) => a.type === UNITY_ACTION_TYPE) as
+          | AppAction<UnityAction>[]
+          | undefined
+      )?.map((action) => ({
+        MemberId: action.member.id,
+        runId: (action.data as UnityAction).runId,
+      }));
 
       if (dataUserRun) {
         const dataUserRunGrouped = groupBy(dataUserRun, (e) => e.MemberId);

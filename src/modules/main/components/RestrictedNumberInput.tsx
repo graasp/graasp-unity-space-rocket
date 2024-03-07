@@ -37,7 +37,7 @@ const RestrictedNumberInput = (
       alignItems="center"
       spacing={1}
     >
-      <Typography>{props.label}: </Typography>
+      <Typography noWrap>{props.label}: </Typography>
       <TextField
         id="outlined-basic"
         // InputLabelProps={{ shrink: true }}

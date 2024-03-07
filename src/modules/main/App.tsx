@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 
 import { useLocalContext } from '@graasp/apps-query-client';
-import { Context, DEFAULT_LANG } from '@graasp/sdk';
+import { Context } from '@graasp/sdk';
 
-import i18n from '../../config/i18n';
+import i18n, { DEFAULT_LANG } from '../../config/i18n';
 import { SettingsProvider } from '../context/SettingsContext';
 import AnalyticsView from './AnalyticsView';
 import BuilderView from './BuilderView';

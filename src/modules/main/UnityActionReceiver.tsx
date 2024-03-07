@@ -29,14 +29,12 @@ const UnityActionReceiver: React.FC<UnityUserTraceProps> = (
   function GetLastRunId(): number {
     const prevUnityTrace = appActions?.filter(
       (a) => a.type === UNITY_ACTION_TYPE && a.member.id === context?.memberId,
-    );
+    ) as AppAction<UnityAction>[] | undefined;
 
     if (prevUnityTrace === undefined || prevUnityTrace?.length === 0) {
       return -1;
     }
-    return Math.max(
-      ...prevUnityTrace.map((a: AppAction) => (a.data as UnityAction).runId),
-    );
+    return Math.max(...prevUnityTrace.map((a) => a.data.runId));
   }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -25,7 +25,7 @@ Sentry.init({
 if (MOCK_API) {
   mockApi(
     {
-      externalUrls: [],
+      externalUrls: [({ url }) => url.includes('BuildSpaceRocket')],
       dbName: window.Cypress ? 'graasp-app-cypress' : undefined,
       appContext: window.Cypress ? window.appContext : defaultMockContext,
       database: window.Cypress ? window.database : buildDatabase(mockMembers),

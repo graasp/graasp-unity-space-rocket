@@ -49,10 +49,8 @@ const PlayerView = (): JSX.Element => {
   };
 
   return (
-    <div data-cy={PLAYER_VIEW_CY}>
-      <Stack>
-        <UnityView recordingComponent saveUnityTraceToAppAction />
-      </Stack>
+    <Stack data-cy={PLAYER_VIEW_CY} spacing={1}>
+      <UnityView recordingComponent saveUnityTraceToAppAction />
       <Stack
         direction="column"
         alignItems="center"
@@ -69,7 +67,7 @@ const PlayerView = (): JSX.Element => {
           }}
         />
       </Stack>
-    </div>
+    </Stack>
   );
 };
 

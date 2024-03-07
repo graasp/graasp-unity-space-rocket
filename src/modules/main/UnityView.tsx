@@ -7,7 +7,13 @@ import {
   RadioButtonChecked,
   StopCircleOutlined,
 } from '@mui/icons-material';
-import { Box, Grid, IconButton, Stack, Typography } from '@mui/material';
+import {
+  Card,
+  CardContent,
+  IconButton,
+  Stack,
+  Typography,
+} from '@mui/material';
 
 import { DEFAULT_UNITY_SETTINGS } from '@/config/settings';
 import { UNITY_SETTINGS_NAME } from '@/interfaces/settings';
@@ -133,26 +139,15 @@ const UnityView = (props: UnityViewProps): JSX.Element => {
   // ************************ ********************* ************************ //
 
   return (
-    <Grid container direction="row" width="100%" minHeight="100%">
-      <Grid
-        item
-        xs={props.recordingComponent ? 2 : 0}
-        display="flex"
-        justifyContent={props.recordingComponent ? 'center' : 'center'}
-        alignItems="center"
-      >
-        {props.recordingComponent && isLoaded && (
-          <Box
-            sx={{
-              boxShadow: 1,
-              p: 2,
-              m: 1,
-              borderRadius: 2,
-              textAlign: 'center',
-              width: 'fit-content',
-              height: 'fit-content',
-            }}
-          >
+    <Stack
+      direction={{ xs: 'column', md: 'row' }}
+      width="100%"
+      alignItems="center"
+      spacing={2}
+    >
+      {props.recordingComponent && isLoaded && (
+        <Card variant="outlined" sx={{ width: 'min-content' }}>
+          <CardContent>
             <Stack direction="column" alignItems="center" spacing={2}>
               <Typography variant="h6">{t('RecordLabel')}</Typography>
               <Stack direction="row">
@@ -185,14 +180,13 @@ const UnityView = (props: UnityViewProps): JSX.Element => {
                 <FileDownload />
               </IconButton>
             </Stack>
-          </Box>
-        )}
-      </Grid>
-      <Grid
-        item
-        xs={props.recordingComponent ? 8 : 12}
-        justifyContent="center"
-        sx={{ textAlign: 'center' }}
+          </CardContent>
+        </Card>
+      )}
+      <Stack
+        flexGrow={2}
+        width={{ xs: '100%', md: 'unset' }}
+        alignItems="center"
       >
         {isLoaded === false && (
           // We'll conditionally render the loading overlay if the Unity
@@ -223,10 +217,14 @@ const UnityView = (props: UnityViewProps): JSX.Element => {
           tabIndex={-1}
           unityProvider={unityProvider}
           style={{
-            width: '80%',
+            width: '100%',
+            height: '100%',
+            // width: '80%',
             aspectRatio: 4 / 3,
             minWidth: 500,
             minHeight: 375,
+            maxWidth: 1200,
+            maxHeight: 900,
           }}
         />
         <UnityActionReceiver
@@ -234,9 +232,8 @@ const UnityView = (props: UnityViewProps): JSX.Element => {
           unityRemoveListener={removeEventListener}
           saveUnityTraceToAppAction={props.saveUnityTraceToAppAction}
         />
-      </Grid>
-      <Grid item xs={props.recordingComponent ? 2 : 0} />
-    </Grid>
+      </Stack>
+    </Stack>
   );
 };
 

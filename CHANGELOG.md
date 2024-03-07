@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.1.3](https://github.com/graasp/graasp-unity-space-rocket/compare/v1.1.2...v1.1.3) (2024-03-07)
+
+
+### Bug Fixes
+
+* cypress env var in tests ([5405069](https://github.com/graasp/graasp-unity-space-rocket/commit/5405069cb5f8088f2665cbebfd70f7f2813faca8))
+* cypress tests ([4137371](https://github.com/graasp/graasp-unity-space-rocket/commit/41373716fb99d9518b9477f6f03dec96267a5923))
+* udpate frame ([b2e2a5d](https://github.com/graasp/graasp-unity-space-rocket/commit/b2e2a5d205010366ce3631c440fbde1e1cc4076d))
+* update deps ([16a5d26](https://github.com/graasp/graasp-unity-space-rocket/commit/16a5d269417847eb1755d9f6172ddaf1d00f0a6b))
+* update workflows ([0fd507b](https://github.com/graasp/graasp-unity-space-rocket/commit/0fd507b9d0707584ddc450df01e763a031b58026))
+
 ## [1.1.2](https://github.com/graasp/graasp-unity-space-rocket/compare/v1.1.1...v1.1.2) (2024-03-06)
 
 
